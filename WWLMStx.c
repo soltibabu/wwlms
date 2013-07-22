@@ -118,10 +118,10 @@ int main() {
 		set_sleep_mode(SLEEP_MODE_PWR_DOWN);
 		EIMSK|=(1<<INT1); //ENABLE INTERRUPT 1
 		ADCSRA=0;
-		cli();
+		asm("cli");
 		MCUCR|=(1<<BODS);
 		MCUCR&=~(1<<BODSE);
-		sei();		//ensure interrupt enable so we can wake up again
+		asm("sei");		//ensure interrupt enable so we can wake up again
 		sleep_cpu(); //go to sleep
 		sleep_disable(); //Wake up here
 		
